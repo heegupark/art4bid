@@ -6,10 +6,6 @@ export default class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      profileImg: '',
-      coverImg: '',
-      description: '',
-      location: '',
       editMode: false
     };
 
@@ -29,6 +25,8 @@ export default class Profile extends React.Component {
   }
 
   renderProfile() {
+    const { profileImg, coverImg, description, userName } = this.props.userInfo;
+
     return (
       <div className='d-flex flex-column align-items-center'>
         <div className='d-flex justify-content-between col-12 mb-2 mt-1'>
@@ -45,12 +43,12 @@ export default class Profile extends React.Component {
             EDIT
           </button>
         </div>
-        <div className='coverPhoto d-flex flex-column align-items-center justify-content-center pt-4'>
-          <div className='profileImg-container'>
+        <div className='coverPhoto d-flex flex-column align-items-center justify-content-center pt-4 col-12' style={{ backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url(${coverImg})` }}>
+          <div className='profileImg-container' style={{ backgroundImage: `url(${profileImg})` }}>
           </div>
-          <h4 id='profileUserName'>myCoolUserName</h4>
+          <h4 id='profileUserName'>{userName}</h4>
           <p className='profile-description text-center mt-2 mb-2 ml-1 mr-1'>
-          This is a sample description of my profile in order to show some dummy data until we can pull the information from context from the app component.
+            {description}
           </p>
         </div>
         <UserPosts/>
@@ -60,7 +58,7 @@ export default class Profile extends React.Component {
 
   renderEditProfile() {
     return (
-      <EditProfile editModeToggle={this.editModeToggle}/>
+      <EditProfile editModeToggle={this.editModeToggle} userInfo={this.props.userInfo}/>
     );
   }
 

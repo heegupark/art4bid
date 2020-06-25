@@ -60,6 +60,7 @@ input, button {
   width: 20%;
   text-align: center;
 }
+
 .nav-icon {
   height: 100%;
   filter: drop-shadow(1px 3px 2px rgba(0, 0, 0, 0.7));
@@ -109,6 +110,7 @@ p, input {
   font-size: 0.7rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .btn-submit-header:active,
 .btn-cancel-header:active {
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -131,6 +133,8 @@ button {
   width: 150px;
   height: 150px;
   background-color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .profileImgEdit:active {
@@ -139,7 +143,6 @@ button {
 
 .profileImg-container {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background-image: url(./images/sample-images/sample-profile-pic.png);
   background-repeat: no-repeat;
   background-size: cover;
   padding: 0;
@@ -153,11 +156,12 @@ button {
   width: 96%;
   background-color: #e0dcdc;
   border-radius: 9px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
 .coverPhoto {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
-  url(./images/sample-images/sample-cover-photo1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   padding: 0;
@@ -168,14 +172,18 @@ button {
   color: white;
   -webkit-text-stroke: 1px black;
 }
+
 .profile-description {
   font-size: .8rem;
+  font-weight: 400;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .description-input,
 .location-info,
 .zip-input,
-.city-display {
+.city-display,
+.email-input {
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   width: 96%;
   border-radius: 9px;
@@ -185,6 +193,95 @@ button {
   color: #a4a4a4;
 }
 
-/* .user-post-grid {
-  backgroun
-} */
+.user-post-grid {
+  /*backgroun*/
+}
+
+.message-sender {
+  font-size: 18px;
+}
+
+.message-postid, .message-time, .message-date {
+  font-size: 9px;
+}
+
+.message-content {
+  font-size: 16px;
+}
+
+.message-box {
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #e0dcdc;
+  border-radius: 6px;
+}
+
+.icon-custom {
+  font-size: 30px;
+  filter: drop-shadow(1px 3px 2px rgba(0, 0, 0, 0.7));
+}
+
+.postid-custom {
+  font-size: 12px;
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Specific Post */
+
+.post-header {
+  height: 12vh;
+  box-sizing: border-box;
+}
+
+.header-icon-container {
+  width: 20%;
+  height: 100%;
+}
+
+.header-icon {
+  width: 100%;
+  height: 50%;
+  object-fit: contain;
+}
+
+.post-header-text > p {
+  line-height: 1.2;
+}
+
+.following {
+  font-size: 0.65rem;
+}
+
+.art-info {
+  height: 65vh;
+}
+
+.post-image-container {
+  height: 50%;
+  background-color: lightgray;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.post-image-container > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.post-description {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 1%;
+  padding: 1px;
+  border-radius: 9px;
+
+}

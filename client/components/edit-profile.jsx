@@ -4,10 +4,12 @@ export default class EditProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      profileImg: '',
-      coverImg: '',
-      description: '',
-      location: ''
+      profileImg: this.props.userInfo.profileImg,
+      coverImg: this.props.userInfo.coverImg,
+      location: this.props.userInfo.location,
+      description: this.props.userInfo.description,
+      email: this.props.userInfo.email,
+      userId: this.props.userInfo.userId
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,6 +28,11 @@ export default class EditProfile extends React.Component {
         description: event.target.value
       });
     }
+    if (event.target.id === 'email-input') {
+      this.setState({
+        email: event.target.value
+      });
+    }
   }
 
   handleSubmit(event) {
@@ -34,15 +41,19 @@ export default class EditProfile extends React.Component {
       profileImg: this.state.profileImg,
       coverImg: this.state.coverImg,
       description: this.state.description,
-      location: this.state.location
+      location: this.state.location,
+      email: this.state.email,
+      userId: this.state.userId
     };
-    alert(profileDetails); // filler function since ESLINT wont allow un-used variables
-    this.setState({
-      profileImg: '',
-      coverImg: '',
-      description: '',
-      location: ''
-    });
+    fetch(`/api/user/${this.state.userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(profileDetails)
+    })
+      .then(response => response.json())
+      .catch(err => console.error(err));
   }
 
   handleCancel() {
@@ -51,6 +62,8 @@ export default class EditProfile extends React.Component {
   }
 
   render() {
+    const { profileImg, coverImg, description, userName, location, email } = this.state;
+
     return (
       <div className='d-flex flex-column align-items-center'>
         <div className='d-flex justify-content-between col-12 mb-2 mt-1'>
@@ -66,11 +79,20 @@ export default class EditProfile extends React.Component {
             SAVE
           </button>
         </div>
-        <div className='coverPhotoEdit d-flex flex-column align-items-center justify-content-center pt-4 pb-4'>
-          <button className='profileImgEdit btn'>
-            <i className="fas fa-plus fa-3x"></i>
+        <div className='coverPhotoEdit d-flex flex-column align-items-center justify-content-center pt-4 pb-4' style={{ backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url(${coverImg})` }}>
+          <button
+            className='profileImgEdit btn'
+            style={profileImg && { backgroundImage: `url(${profileImg})` } }>
+            {!profileImg ? <i className="fas fa-plus fa-3x"></i> : null}
           </button>
-          <h4>myCoolUserName</h4>
+          <input
+            type="file"
+            id="profile-img-upload"
+            name="profile-img-upload"
+            accept=".png, .jpeg, .gif"
+            className="profile-img-upload"
+          />
+          <h4>{userName}</h4>
         </div>
         <textarea
           name="description-input"
@@ -79,6 +101,7 @@ export default class EditProfile extends React.Component {
           cols="50"
           rows="4"
           placeholder='Enter description here...'
+          value={description}
           onChange={this.handleChange}>
         </textarea>
         <div className='location-info d-flex flex-column align-items-center justify-content-center'>
@@ -88,6 +111,7 @@ export default class EditProfile extends React.Component {
               name='zip-input'
               id='zip-input'
               type="number"
+              value={location}
               className='zip-input mt-3 col-5 border-0'
               onChange={this.handleChange}/>
           </div>
@@ -99,6 +123,17 @@ export default class EditProfile extends React.Component {
               type="number"
               className='zip-input mt-3 col-5 border-0'
               disabled/>
+          </div>
+          <div className='d-flex flex-end justify-content-center align-items-end col-12'>
+            <label htmlFor="zip-input" className='col-5 text-center'>Email:</label>
+            <input
+              name='email-input'
+              id='email-input'
+              type="text"
+              value={email}
+              onChange={this.handleChange}
+              className='email-input mt-3 col-5 border-0'
+            />
           </div>
         </div>
       </div>

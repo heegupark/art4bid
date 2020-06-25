@@ -21,7 +21,8 @@ export default class ThumbnailColumn extends React.Component {
         <img
           key={thumbnail.postId}
           src={thumbnail.imageUrl}
-          className="w-100 contain">
+          className="w-100 contain fadeIn"
+          onClick={() => this.props.setView('post')}>
         </img>
       );
     });
